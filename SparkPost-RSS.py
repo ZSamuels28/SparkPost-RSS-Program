@@ -88,10 +88,18 @@ layout = [
     ],
     [
         sg.Multiline(
-            size=(50, 20), sbar_arrow_width=15, enable_events=True, key="template"
+            size=(50, 20),
+            sbar_arrow_width=15,
+            enable_events=True,
+            key="template",
         ),
         sg.Button("<", font="Any 30"),
-        sg.Listbox(values=[], size=(30, 19), sbar_arrow_width=15, key="rss-elements"),
+        sg.Listbox(
+            values=[],
+            size=(30, 19),
+            sbar_arrow_width=15,
+            key="rss-elements",
+        ),
     ],
     [sg.Button("Send"), sg.Button("Update Template"), sg.Button("Close")],
 ]
@@ -199,7 +207,10 @@ while True:
                 values["rss-number"].isnumeric() == False
             ):  # If number of RSS feeds is non-numeric, throw a popup error.
                 sg.popup(
-                    "Invalid number", location=center, font="Any 16", keep_on_top=True
+                    "Invalid number",
+                    location=center,
+                    font="Any 16",
+                    keep_on_top=True,
                 )
             elif int(values["rss-number"]) > len(
                 feed.entries
@@ -225,7 +236,10 @@ while True:
                     substitution_data={"items": items},
                 )
                 sg.popup(
-                    "Email Sent!", location=center, font="Any 16", keep_on_top=True
+                    "Email Sent!",
+                    location=center,
+                    font="Any 16",
+                    keep_on_top=True,
                 )
 
     # If window is closed or "Close" button is clicked, break out of the while loop
