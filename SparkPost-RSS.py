@@ -31,15 +31,15 @@ for item in response.json()['results']:
     recipient_ids.append(item['id'])
 
 if template_ids == []:
-    sg.popup("No templates, please login to SparkPost.com and create a template to use.")
+    sg.popup("No templates, please login to SparkPost.com and create a template to use.",keep_on_top=True)
     os._exit(0)
 elif recipient_ids == []:
-    sg.popup("No recipient lists, please login to SparkPost.com and create a recipient list to use.")
+    sg.popup("No recipient lists, please login to SparkPost.com and create a recipient list to use.",keep_on_top=True)
     os._exit(0)
 
 layout = [
-    [sg.Text('Enter RSS URL',size=(15,1)),sg.InputText(key='rss-url'),sg.Button('Read RSS')],
-    [sg.Text('How many RSS items to send?', size =(25, 1)), sg.InputText(key='rss-number',size=(3,1))],
+    [sg.Text('Enter RSS URL:',size=(13,1)),sg.InputText(key='rss-url'),sg.Button('Read RSS')],
+    [sg.Text('How many RSS items to send?', size =(24, 1)), sg.InputText(key='rss-number',size=(2,1))],
     [sg.Text('Enter Campaign ID', size =(15, 1)), sg.InputText(key='campaign-id')],
     [sg.Text('Choose Template', size =(15, 1)), sg.Combo(template_ids,size=(50,1),enable_events=True,key='template-id')],
     [sg.Text('Choose Recipient List', size =(18, 1)), sg.Combo(recipient_ids,default_value=recipient_ids[0],size=(50,1),key='recipient-id')],
@@ -50,8 +50,7 @@ layout = [
     [sg.Button("Send"), sg.Button("Close")]
 ]
   
-window = sg.Window('SparkPost RSS Tranmission', layout, return_keyboard_events=True, finalize=True)
-window.bring_to_front()
+window = sg.Window('SparkPost RSS Tranmission', layout, finalize=True)
 template_box = window["template"]
 
 sp = SparkPost(SPARKPOST_API_KEY)
@@ -66,13 +65,9 @@ while True:
         template = sp.templates.get(values['template-id'])
         window['template'].update(template['content']['html'])
 
-    #if event == "template":
-        #m1.get_focus()
-        #print("Hello!")
-
     elif (event == "<"):
+        template_box.Widget.insert(sg.tk.INSERT,values['rss-elements'])
         template_box.set_focus()
-        template_box.update("Test",append=True)
 
     elif (event == 'Update Template'):
         confirm = sg.popup_yes_no("Are you sure you want to update this template?",keep_on_top=True)

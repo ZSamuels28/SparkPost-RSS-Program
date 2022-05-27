@@ -1,0 +1,8 @@
+<html>
+  <body>
+    {{ each items }}
+    <p><a href="{{ loop_var.link }}"> {{ loop_var.title }} </a></p>
+    <p>{{ loop_var.summary }}</p>
+    {{ end }}
+  </body>
+</html>
