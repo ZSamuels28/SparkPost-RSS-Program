@@ -101,7 +101,11 @@ layout = [
             key="rss-elements",
         ),
     ],
-    [sg.Button("Send"), sg.Button("Update Template"), sg.Button("Close")],
+    [
+        sg.Button("Send"),
+        sg.Button("Update Template"),
+        sg.Button("Close"),
+    ],
 ]
 
 window = sg.Window(
