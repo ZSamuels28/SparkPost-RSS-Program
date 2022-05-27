@@ -116,7 +116,7 @@ rss_elements = (
 def center_of_window(window_size, window_location):
     x = window.size[0] / 2
     y = window.size[1] / 2
-    center = (window_location[0] + x - 50, window_location[1] + y)
+    center = (window_location[0] + x - 110, window_location[1] + y)
     return center
 
 
