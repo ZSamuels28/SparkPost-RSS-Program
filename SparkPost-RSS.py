@@ -124,9 +124,12 @@ while True:
 
     # Read in the window events and values of the objects
     event, values = window.read()
-    window.force_focus()
     window.bring_to_front()
-    center = center_of_window(window.current_size_accurate(), window.current_location())
+
+    if event != sg.WIN_CLOSED or event == "Close":
+        center = center_of_window(
+            window.current_size_accurate(), window.current_location()
+        )
     # If a template is selected from the dropdown, get that template using the SparkPost API library and display it in the template box
     if event == "template-id":
         template = sp.templates.get(values["template-id"])
@@ -161,9 +164,11 @@ while True:
     elif event == "Read RSS":
         feed = feedparser.parse(values["rss-url"])
         if feed.feed.keys():
-            keys = feed.feed.keys()
-            rss_elements = keys
-            window["rss-elements"].update(keys)
+            for entry in feed.entries:
+                for key in entry.keys():
+                    if key not in rss_elements:
+                        rss_elements.append(key)
+            window["rss-elements"].update(rss_elements)
         else:
             sg.popup(
                 "No keys found in this RSS Feed, please check the RSS URL.",
@@ -171,14 +176,15 @@ while True:
                 font="Any 16",
                 keep_on_top=True,
             )
+            window["rss-elements"].update([])
 
     # If the Send button is clicked go through a number of error checks.
     # Feed in the RSS items, and send the selected template to the selected recipient list.
     elif event == "Send":
-        if rss_elements == []:
-            # If RSS elements haven't been read yet, throw a popup error
+        if feedparser.parse(values["rss-url"]).entries == []:
+            # If RSS URL is invalid, throw a popup error
             sg.popup(
-                "No elements have been read",
+                "Invalid RSS URL",
                 location=center,
                 font="Any 16",
                 keep_on_top=True,
@@ -193,7 +199,6 @@ while True:
                 keep_on_top=True,
             )
         else:
-            feed = feedparser.parse(values["rss-url"])
             if (
                 values["rss-number"] == ""
             ):  # If no number of RSS feeds have been selected, throw a popup error.
@@ -213,7 +218,7 @@ while True:
                     keep_on_top=True,
                 )
             elif int(values["rss-number"]) > len(
-                feed.entries
+                feedparser.parse(values["rss-url"]).entries
             ):  # If number of RSS feeds is more than are available, throw a popup error.
                 sg.popup(
                     "Too many elements selected",
