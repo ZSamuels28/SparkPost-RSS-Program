@@ -34,11 +34,10 @@ window = build_window.build_window(template_ids, recipient_ids)
 
 while True:
 
+    center_of_window = build_window.center_of_window(window)
     # Read in the window events and values of the objects
     event, values = window.read()
-    window.bring_to_front()
-    center_of_window = build_window.center_of_window(window)
-
+    # window.bring_to_front()
     match event:
         case "template-id":
             events.template_id(window, values, sp)
@@ -53,7 +52,7 @@ while True:
         case "Read RSS":
             events.read_rss(window, center_of_window, values, rss_elements)
         case "Send":
-            events.send(values, center_of_window, sp)
+            events.send(values, window, center_of_window, sp)
         case sg.WIN_CLOSED:
             break
         case "Close":

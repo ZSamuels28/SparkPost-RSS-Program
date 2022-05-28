@@ -68,6 +68,15 @@ def build_window(template_ids, recipient_ids):
                 key="filter",
             ),
         ],
+        # [
+        #    sg.Text(
+        #        "",
+        #        auto_size_text=True,
+        #        visible=False,
+        #        text_color="red",
+        #        key="errors",
+        #    )
+        # ],
         [
             sg.Multiline(
                 size=(50, 20),
