@@ -52,10 +52,10 @@ while True:
         case "Read RSS":
             events.read_rss(window, center_of_window, values, rss_elements)
         case "Send":
-            events.send(values, window, center_of_window, sp)
+            events.send(values, center_of_window, sp)
         case sg.WIN_CLOSED:
             break
         case "Close":
             break
 
-build_window.close()
+window.close()

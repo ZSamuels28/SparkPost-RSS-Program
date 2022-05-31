@@ -1,13 +1,10 @@
-import os
-from dotenv import load_dotenv
-from pathlib import Path
 import PySimpleGUI as sg
 import requests
 import feedparser
 
 # Feed in the RSS items, and send the selected template to the selected recipient list.
 # Note there is a number of error checks before sending.
-def send(window_values, window, window_center, sparkpost):
+def send(window_values, window_center, sparkpost):
     if feedparser.parse(window_values["rss-url"]).entries == []:
         # window["errors"].update("ERROR: INVALID RSS URL", visible=True)
         # If RSS URL is invalid, throw a popup error
@@ -111,13 +108,33 @@ def update_template(window_values, window_center, sparkpost, host, api_key):
         template["content"]["html"] = window_values["template"]
         params = {"update_published": "true"}
         headers = {"Authorization": api_key}
-        # print(window_values["template-id"])
         response = requests.put(
-            host + "/api/v1/templates/" + template["id"],
+            "".join([host, "/api/v1/templates/", template["id"]]),
             headers=headers,
             params=params,
             json=template,
         )
+        if response.status_code == 200:
+            sg.popup(
+                "Template successfully updated.",
+                location=window_center,
+                font="Any 16",
+                keep_on_top=True,
+            )
+        else:
+            sg.popup(
+                "".join(
+                    [
+                        "Template update failed with status code ",
+                        str(response.status_code),
+                        ": ",
+                        response.reason,
+                    ]
+                ),
+                location=window_center,
+                font="Any 16",
+                keep_on_top=True,
+            )
 
 
 def rss_elements(window, window_values):

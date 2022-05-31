@@ -8,7 +8,9 @@ def get_template_ids(sparkpost_host, api_key):
     headers = {"Authorization": api_key}
     params = {"draft": "false"}
     response = requests.get(
-        sparkpost_host + "/api/v1/templates", headers=headers, params=params
+        "".join([sparkpost_host, "/api/v1/templates"]),
+        headers=headers,
+        params=params,
     )
     template_ids = []
     for item in response.json()["results"]:
@@ -28,7 +30,10 @@ def get_recipient_ids(sparkpost_host, api_key):
     # Pulls a list of recipient list IDs into the variable recipient_ids
     recipient_ids = []
     headers = {"Authorization": api_key}
-    response = requests.get(sparkpost_host + "/api/v1/recipient-lists", headers=headers)
+    response = requests.get(
+        "".join([sparkpost_host, "/api/v1/recipient-lists"]),
+        headers=headers,
+    )
     for item in response.json()["results"]:
         recipient_ids.append(item["id"])
 
