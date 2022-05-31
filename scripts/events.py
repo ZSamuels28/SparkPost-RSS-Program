@@ -1,10 +1,12 @@
 import PySimpleGUI as sg
 import requests
 import feedparser
+from scripts.build_window import center_of_window
 
 # Feed in the RSS items, and send the selected template to the selected recipient list.
 # Note there is a number of error checks before sending.
-def send(window_values, window_center, sparkpost):
+def send(window, window_values, sparkpost):
+    window_center = center_of_window(window)
     if feedparser.parse(window_values["rss-url"]).entries == []:
         # window["errors"].update("ERROR: INVALID RSS URL", visible=True)
         # If RSS URL is invalid, throw a popup error
@@ -75,7 +77,8 @@ def send(window_values, window_center, sparkpost):
 
 # Parse the RSS URL provided and show the elements in a GUI selection.
 # If the RSS URL is invalid (contains no elements) an error will be thrown.
-def read_rss(window, window_center, window_values, rss_elements):
+def read_rss(window, window_values, rss_elements):
+    window_center = center_of_window(window)
     feed = feedparser.parse(window_values["rss-url"])
     if feed.feed.keys():
         for entry in feed.entries:
@@ -96,7 +99,8 @@ def read_rss(window, window_center, window_values, rss_elements):
 
 
 # Throw a prompt and if confirmed, update the template HTML with the template HTML in the GUI box
-def update_template(window_values, window_center, sparkpost, host, api_key):
+def update_template(window, window_values, sparkpost, host, api_key):
+    window_center = center_of_window(window)
     confirm = sg.popup_yes_no(
         "Are you sure you want to update this template?",
         location=window_center,

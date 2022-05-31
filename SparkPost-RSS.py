@@ -34,10 +34,8 @@ window = build_window.build_window(template_ids, recipient_ids)
 
 while True:
 
-    center_of_window = build_window.center_of_window(window)
     # Read in the window events and values of the objects
     event, values = window.read()
-    # window.bring_to_front()
     match event:
         case "template-id":
             events.template_id(window, values, sp)
@@ -47,12 +45,12 @@ while True:
             events.rss_elements(window, values)
         case "Update Template":
             events.update_template(
-                values, center_of_window, sp, SPARKPOST_HOST, SPARKPOST_API_KEY
+                window, values, sp, SPARKPOST_HOST, SPARKPOST_API_KEY
             )
         case "Read RSS":
-            events.read_rss(window, center_of_window, values, rss_elements)
+            events.read_rss(window, values, rss_elements)
         case "Send":
-            events.send(values, center_of_window, sp)
+            events.send(window, values, sp)
         case sg.WIN_CLOSED:
             break
         case "Close":
