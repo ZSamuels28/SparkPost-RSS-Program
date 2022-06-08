@@ -4,11 +4,10 @@ import feedparser
 from scripts.build_window import center_of_window
 
 # Feed in the RSS items, and send the selected template to the selected recipient list.
-# Note there is a number of error checks before sending.
+# Note there are a number of error checks before sending.
 def send(window, window_values, sparkpost):
     window_center = center_of_window(window)
     if feedparser.parse(window_values["rss-url"]).entries == []:
-        # window["errors"].update("ERROR: INVALID RSS URL", visible=True)
         # If RSS URL is invalid, throw a popup error
         sg.popup(
             "Invalid RSS URL",

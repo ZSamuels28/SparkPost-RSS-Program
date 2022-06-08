@@ -68,15 +68,6 @@ def build_window(template_ids, recipient_ids):
                 key="filter",
             ),
         ],
-        # [
-        #    sg.Text(
-        #        "",
-        #        auto_size_text=True,
-        #        visible=False,
-        #        text_color="red",
-        #        key="errors",
-        #    )
-        # ],
         [
             sg.Multiline(
                 size=(50, 20),
@@ -109,6 +100,7 @@ def build_window(template_ids, recipient_ids):
     return window
 
 
+# Gets the center of the window to be used for pop-ups
 def center_of_window(window):
     x = window.current_size_accurate()[0] / 2
     y = window.current_size_accurate()[1] / 2
