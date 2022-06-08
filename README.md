@@ -12,20 +12,14 @@ Or if on Mac/Linux:
 `pip3 install LIBRARYNAME`
 
 Necessary Libraries:
+
 `os`
-
 `sparkpost`
-
 `dotenv`
-
 `pathlib`
-
 `PySimpleGUI`
-
 `requests`
-
 `feedparser`
-
 `ssl`
 
 Once installed, clone this repo.
