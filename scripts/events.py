@@ -16,7 +16,7 @@ def send(window, window_values, sparkpost):
             keep_on_top=True,
         )
     elif (
-        window_values["template-id"] == []
+        window_values["template_id"] == []
     ):  # If a template hasn't been selected, throw a popup error
         sg.popup(
             "No templates have been selected",
@@ -61,9 +61,9 @@ def send(window, window_values, sparkpost):
 
             # Send the transmission
             sparkpost.transmissions.send(
-                campaign=window_values["campaign-id"],
-                recipient_list=window_values["recipient-id"],
-                template=window_values["template-id"],
+                campaign=window_values["campaign_id"],
+                recipient_list=window_values["recipient_id"],
+                template=window_values["template_id"],
                 substitution_data={"items": items},
             )
             sg.popup(
@@ -85,7 +85,7 @@ def read_rss(window, window_values, rss_elements):
                 if key not in rss_elements:
                     rss_elements.append(key)
         rss_elements.sort()
-        window["rss-elements"].update(values=rss_elements)
+        window["rss_elements"].update(values=rss_elements)
     else:
         sg.popup(
             "No keys found in this RSS Feed, please check the RSS URL.",
@@ -94,7 +94,7 @@ def read_rss(window, window_values, rss_elements):
             keep_on_top=True,
         )
         rss_elements = []
-        window["rss-elements"].update(values=rss_elements)
+        window["rss_elements"].update(values=rss_elements)
 
 
 # Throw a prompt and if confirmed, update the template HTML with the template HTML in the GUI box
@@ -107,7 +107,15 @@ def update_template(window, window_values, sparkpost, host, api_key):
         keep_on_top=True,
     )
     if confirm == "Yes":
-        template = sparkpost.templates.get(window_values["template-id"])
+        if window_values["template_id"] == "":
+            sg.popup(
+                "No Template Selected.",
+                location=window_center,
+                font="Any 16",
+                keep_on_top=True,
+            )
+            return
+        template = sparkpost.templates.get(window_values["template_id"])
         template["content"]["html"] = window_values["template"]
         params = {"update_published": "true"}
         headers = {"Authorization": api_key}
@@ -141,21 +149,21 @@ def update_template(window, window_values, sparkpost, host, api_key):
 
 
 def rss_elements(window, window_values):
-    window["template"].Widget.insert(sg.tk.INSERT, window_values["rss-elements"])
-    window["rss-elements"].update(set_to_index=-1)
+    window["template"].Widget.insert(sg.tk.INSERT, window_values["rss_elements"])
+    window["rss_elements"].update(set_to_index=-1)
     window["template"].set_focus()
 
 
 def filter(window, window_values, rss_elements):
     if window_values["filter"] == "":
-        window["rss-elements"].update(rss_elements)
+        window["rss_elements"].update(rss_elements)
     else:
         search = window_values["filter"]
         new_values = [x for x in rss_elements if search in x]  # do the filtering
-        window["rss-elements"].update(new_values)  # display in the listbox
+        window["rss_elements"].update(new_values)  # display in the listbox
 
 
 # If a template is selected from the dropdown, get that template using the SparkPost API library and display it in the template box
 def template_id(window, window_values, sparkpost):
-    template = sparkpost.templates.get(window_values["template-id"])
+    template = sparkpost.templates.get(window_values["template_id"])
     window["template"].update(template["content"]["html"])

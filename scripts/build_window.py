@@ -10,7 +10,7 @@ def build_window(template_ids, recipient_ids):
                 auto_size_text=True,
             ),
             sg.InputText(key="rss-url"),
-            sg.Button("Read RSS"),
+            sg.Button("Read RSS", key="read_rss"),
         ],
         [
             sg.Text(
@@ -29,7 +29,7 @@ def build_window(template_ids, recipient_ids):
             ),
             sg.InputText(
                 size=(30, 1),
-                key="campaign-id",
+                key="campaign_id",
             ),
         ],
         [
@@ -42,7 +42,7 @@ def build_window(template_ids, recipient_ids):
                 auto_size_text=True,
                 enable_events=True,
                 readonly=True,
-                key="template-id",
+                key="template_id",
             ),
         ],
         [
@@ -55,7 +55,7 @@ def build_window(template_ids, recipient_ids):
                 default_value=recipient_ids[0],
                 auto_size_text=True,
                 readonly=True,
-                key="recipient-id",
+                key="recipient_id",
             ),
             sg.Text(
                 "Filter Elements: ",
@@ -80,13 +80,13 @@ def build_window(template_ids, recipient_ids):
                 sbar_arrow_width=15,
                 size=(30, 19),
                 enable_events=True,
-                key="rss-elements",
+                key="rss_elements",
             ),
         ],
         [
-            sg.Button("Send"),
-            sg.Button("Update Template"),
-            sg.Button("Close"),
+            sg.Button("Send", key="send"),
+            sg.Button("Update Template", key="update_template"),
+            sg.Button("Close", key="close"),
         ],
     ]
 

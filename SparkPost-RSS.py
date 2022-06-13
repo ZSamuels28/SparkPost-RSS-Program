@@ -33,27 +33,26 @@ template_ids, recipient_ids = (
 window = build_window.build_window(template_ids, recipient_ids)
 
 while True:
-
     # Read in the window events and values of the objects
     event, values = window.read()
     match event:
-        case "template-id":
+        case "template_id":
             events.template_id(window, values, sp)
         case "filter":
             events.filter(window, values, rss_elements)
-        case "rss-elements":
+        case "rss_elements":
             events.rss_elements(window, values)
-        case "Update Template":
+        case "update_template":
             events.update_template(
                 window, values, sp, SPARKPOST_HOST, SPARKPOST_API_KEY
             )
-        case "Read RSS":
+        case "read_rss":
             events.read_rss(window, values, rss_elements)
-        case "Send":
+        case "send":
             events.send(window, values, sp)
         case sg.WIN_CLOSED:
             break
-        case "Close":
+        case "close":
             break
 
 window.close()
