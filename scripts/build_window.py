@@ -59,7 +59,7 @@ def build_window(template_ids, recipient_ids):
             ),
             sg.Text(
                 "Filter Elements: ",
-                size=(34, 1),
+                size=(26, 1),
                 justification="right",
             ),
             sg.Input(
