@@ -45,7 +45,7 @@ NOTE: You must have templates and receipient lists created in SparkPost, if you 
 
 ## Usage
 
-NOTE: There currently is an issue with the PySimpleGui library and pop-ups randomly not appearing on M1 Macs. See [here](https://github.com/PySimpleGUI/PySimpleGUI/issues/5471) for current status.
+|NOTE: There currently is an issue with the PySimpleGui library and pop-ups randomly not appearing on M1 Macs. See [here](https://github.com/PySimpleGUI/PySimpleGUI/issues/5471) for current status.|
 
 Locate and open the SparkPost-RSS.py file utilizing the command prompt or terminal with `python SparkPost-RSS.py` or `python3 SparkPost-RSS.py`.
 
