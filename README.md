@@ -22,7 +22,7 @@ _Note: In the above commands, you may need to run `pip3` instead of `pip`._
 
 ## Pre-requisites
 
-Input your SparkPost API Key into the `sample.env` file and rename the file `variables.env`. Note these care case sensitive:
+Input your SparkPost API Key into the `sample.env` file and rename the file `variables.env`. Note these are case sensitive:
 
 ```
 SPARKPOST_HOST
