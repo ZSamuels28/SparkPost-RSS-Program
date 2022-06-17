@@ -15,7 +15,6 @@ git clone https://github.com/ZSamuels28/SparkPost-RSS-Program.git
 cd SparkPost-RSS-Program
 python3 -m pip install pipenv
 pipenv install
-pipenv shell
 ```
 
 _Note: In the above commands, you may need to run `pip3` instead of `pip`._
