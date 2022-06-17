@@ -2,26 +2,25 @@
 
 [Sign up](https://app.sparkpost.com/join?plan=free-0817?src=Social%20Media&sfdcid=70160000000pqBb&pc=GitHubSignUp&utm_source=github&utm_medium=social-media&utm_campaign=github&utm_content=sign-up) for a SparkPost account and visit our [Developer Hub](https://developers.sparkpost.com) for even more content.
 
+## Easy installation
+
+Firstly ensure you have `python3`, `pip` and `git`.
+
+Next, get the project. Install `pipenv` (`--user` option recommended, [see this article](https://stackoverflow.com/questions/42988977/what-is-the-purpose-pip-install-user)) and [this article for MacOS](https://stackoverflow.com/questions/60004431/pip-error-when-trying-to-run-pip-command-from-virtualenv-on-macos).
+
+Once you have `pipenv`, you can use it to install the project dependencies.
+
+```
+git clone https://github.com/ZSamuels28/SparkPost-RSS-Program.git
+cd SparkPost-RSS-Program
+python3 -m pip install pipenv
+pipenv install
+pipenv shell
+```
+
+_Note: In the above commands, you may need to run `pip3` instead of `pip`._
+
 ## Pre-requisites
-
-Firstly ensure you have `python` installed.
-
-Then install the following libraries with the following command:
-`pip install LIBRARYNAME`
-Or if on Mac/Linux:
-`pip3 install LIBRARYNAME`
-
-Necessary Libraries:
-`os`
-`sparkpost`
-`dotenv`
-`pathlib`
-`PySimpleGUI`
-`requests`
-`feedparser`
-`ssl`
-
-Once installed, clone this repo.
 
 Input your SparkPost API Key into the `sample.env` file and rename the file `variables.env`. Note these care case sensitive:
 
@@ -47,7 +46,11 @@ NOTE: You must have templates and receipient lists created in SparkPost, if you 
 
 | NOTE: There currently is an issue with the PySimpleGui library and pop-ups randomly not appearing on M1 Macs. See [here](https://github.com/PySimpleGUI/PySimpleGUI/issues/5471) for current status. |
 
-Locate and open the SparkPost-RSS.py file utilizing the command prompt or terminal with `python SparkPost-RSS.py` or `python3 SparkPost-RSS.py`.
+```
+cd SparkPost-RSS-Program
+pyenv shell
+python SparkPost-RSS.py
+```
 
 You will see the SparkPost RSS Transmission program with the following inputs/options:
 

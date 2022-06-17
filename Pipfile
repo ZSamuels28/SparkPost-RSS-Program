@@ -4,12 +4,14 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-requests = "*"
-os = "*"
 sparkpost = "*"
-dotenv = "*"
+python-dotenv = "*"
 pathlib = "*"
-PySimpleGUI = "*"
+pysimplegui = "*"
 requests = "*"
 feedparser = "*"
-ssl = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.10"
