@@ -43,8 +43,6 @@ NOTE: You must have templates and receipient lists created in SparkPost, if you 
 
 ## Usage
 
-| NOTE: There currently is an issue with the PySimpleGui library and pop-ups randomly not appearing on M1 Macs. See [here](https://github.com/PySimpleGUI/PySimpleGUI/issues/5471) for current status. |
-
 ```
 cd SparkPost-RSS-Program
 pyenv shell
