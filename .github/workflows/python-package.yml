@@ -31,6 +31,8 @@ jobs:
         pipenv install
     - name: Simple Smoke Test
       run: |
-        export SPARKPOST_API_KEY=${{ secrets.SPARKPOST_API_KEY }}
-        export SPARKPOST_HOST=${{ secrets.SPARKPOST_HOST }}
+        echo "#.env" > config/variables.env
+        echo "SPARKPOST_API_KEY=${{ secrets.SPARKPOST_API_KEY }}" >> config/variables.env
+        echo "SPARKPOST_HOST=${{ secrets.SPARKPOST_HOST }}" >> config/variables.env
+        cat config/variables.env
         pipenv run ./SparkPost-RSS.py
