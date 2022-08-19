@@ -29,8 +29,9 @@ jobs:
         python -m pip install --upgrade pip
         python -m pip install pipenv
         pipenv install
-    - name: Test with pytest
+    - name: Simple Smoke Test
       run: |
+        git update-index --chmod=+x ./SparkPost-RSS.py
         export SPARKPOST_API_KEY=${{ secrets.SPARKPOST_API_KEY }}
         export SPARKPOST_HOST=${{ secrets.SPARKPOST_HOST }}
         pipenv run ./SparkPost-RSS.py
