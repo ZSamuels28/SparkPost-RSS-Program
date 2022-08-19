@@ -12,7 +12,7 @@ on:
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     strategy:
       fail-fast: true
       matrix:
@@ -34,5 +34,4 @@ jobs:
         echo "#.env" > config/variables.env
         echo "SPARKPOST_API_KEY=${{ secrets.SPARKPOST_API_KEY }}" >> config/variables.env
         echo "SPARKPOST_HOST=${{ secrets.SPARKPOST_HOST }}" >> config/variables.env
-        cat config/variables.env
-        pipenv run ./SparkPost-RSS.py
+        pipenv run SparkPost-RSS.py
