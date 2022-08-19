@@ -30,13 +30,14 @@ jobs:
         python -m pip install pipenv
         pipenv install
     - name: Create variables file
-      run: 'echo "$SPARKPOST_API_KEY" > key'
+      run:  |
+       echo "$SPARKPOST_API_KEY" > config/variables.env
       shell: bash
       env:
          SPARKPOST_API_KEY: ${{secrets.SPARKPOST_API_KEY}}
     - name: Simple Smoke Test
       run: |
-        echo key
+        cat config/variables.env
         echo "#.env" > config/variables.env
         echo "SPARKPOST_API_KEY=${{ secrets.SPARKPOST_API_KEY }}" >> config/variables.env
         echo "SPARKPOST_HOST=${{ secrets.SPARKPOST_HOST }}" >> config/variables.env
