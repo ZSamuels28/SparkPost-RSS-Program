@@ -31,4 +31,6 @@ jobs:
         pipenv install
     - name: Test with pytest
       run: |
+        export SPARKPOST_API_KEY=${{ secrets.SPARKPOST_API_KEY }}
+        export SPARKPOST_HOST=${{ secrets.SPARKPOST_HOST }}
         pipenv run ./SparkPost-RSS.py
