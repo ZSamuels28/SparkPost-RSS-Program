@@ -31,7 +31,6 @@ jobs:
         pipenv install
     - name: Simple Smoke Test
       run: |
-        echo "#.env" > config/variables.env
         echo "SPARKPOST_API_KEY=${{ secrets.SPARKPOST_API_KEY }}" >> config/variables.env
         echo "SPARKPOST_HOST=${{ secrets.SPARKPOST_HOST }}" >> config/variables.env
         pipenv run SparkPost-RSS.py
