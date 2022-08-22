@@ -1,7 +1,7 @@
 # This workflow will install Python dependencies, run tests and lint with a variety of Python versions
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
 
-name: Python package
+name: SparkPost-RSS-Program
 
 on:
   push:
@@ -14,7 +14,7 @@ jobs:
 
     runs-on: windows-latest
     strategy:
-      fail-fast: true
+      fail-fast: false
       matrix:
         python-version: ["3.10"]
 
@@ -31,7 +31,6 @@ jobs:
         pipenv install
     - name: Simple Smoke Test
       run: |
-        echo "#.env" > config/variables.env
         echo "SPARKPOST_API_KEY=${{ secrets.SPARKPOST_API_KEY }}" >> config/variables.env
         echo "SPARKPOST_HOST=${{ secrets.SPARKPOST_HOST }}" >> config/variables.env
         pipenv run SparkPost-RSS.py
